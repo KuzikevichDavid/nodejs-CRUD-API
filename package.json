@@ -1,0 +1,32 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "simple crud api",
+  "scripts": {
+    "start": "nodemon",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KuzikevichDavid/nodejs-CRUD-API.git"
+  },
+  "keywords": [
+    "crud-api",
+    "api",
+    "crud"
+  ],
+  "author": "Davyd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KuzikevichDavid/nodejs-CRUD-API/issues"
+  },
+  "homepage": "https://github.com/KuzikevichDavid/nodejs-CRUD-API#readme",
+  "dependencies": {
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.17",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1"
+  }
+}
