@@ -1,89 +1,91 @@
-import { ErrValidate } from "../../constants";
+import { ErrValidate } from '../../constants';
 
-export class User{
-    constructor(public readonly id:string,
-        private _username:string,
-        private _age: number,
-        private _hobbies: string[]) {
-            if (!User.isValid(this))
-                throw ErrValidate;
-        }
+export class User {
+  constructor(
+    public readonly id: string,
+    private _username: string,
+    private _age: number,
+    private _hobbies: string[]
+  ) {
+    if (!User.isValid(this)) throw ErrValidate;
+  }
 
-    public get age(): number {
-        return this._age;
-    }
-  
-    public set age(n: number) {
-        if (User.isValidAge(n))
-        this._age = n;
-        else throw ErrValidate;
-    }
+  public get age(): number {
+    return this._age;
+  }
 
-    public get username(): string {
-        return this._username;
-    }
-  
-    public set username(uName: string) {
-        if (User.isValidName(uName))
-            this._username = uName;
-            else throw ErrValidate;
-    }
-    
-    public get hobbies(): string[] {
-        return this._hobbies;
-    }
-  
-    public set hobbies(hobby: string[]) {
-        if (User.isValidHobbies(hobby))
-            this._hobbies = hobby;
-        else throw ErrValidate;
-    }
+  public set age(n: number) {
+    if (User.isValidAge(n)) this._age = n;
+    else throw ErrValidate;
+  }
 
-    public toJSON(): object{
-        return {
-            id: this.id,
-            username: this._username,
-            age: this._age,
-            hobbies: this._hobbies
-        }
-    }
+  public get username(): string {
+    return this._username;
+  }
 
-    public json(): string {
-        return User.toJSON(this);
-    }
-    
-    private static isValid(user: User): boolean {
-        if (!(User.isValidName(user._username)
-            || User.isValidAge(user._age)
-            || User.isValidHobbies(user._hobbies)))
-            return false
-        return true;
-    }
+  public set username(uName: string) {
+    if (User.isValidName(uName)) this._username = uName;
+    else throw ErrValidate;
+  }
 
-    public static isValidName(uName: string) : boolean {
-        if(!uName || uName?.length === 0){
-            return false
-        }
-        return true;
-    }
+  public get hobbies(): string[] {
+    return this._hobbies;
+  }
 
-    public static isValidAge(age: number) : boolean {
-        if(!age){
-            return false
-        }
-        return true;
-    }
+  public set hobbies(hobby: string[]) {
+    if (User.isValidHobbies(hobby)) this._hobbies = hobby;
+    else throw ErrValidate;
+  }
 
-    public static isValidHobbies(hobbies: string[]) : boolean{
-        if(!hobbies){
-            return false
-        }
-        return true;
-    }
+  public toJSON(): object {
+    return {
+      id: this.id,
+      username: this._username,
+      age: this._age,
+      hobbies: this._hobbies
+    };
+  }
 
-    public static toJSON(user: User | User[]) : string {
-        return JSON.stringify(user, User.jsonReplacer)
-    }
+  public json(): string {
+    return User.toJSON(this);
+  }
 
-    private static jsonReplacer: string[] = ['id', 'username', 'age', 'hobbies'];
+  private static isValid(user: User): boolean {
+    if (
+      !(
+        User.isValidName(user._username) ||
+        User.isValidAge(user._age) ||
+        User.isValidHobbies(user._hobbies)
+      )
+    )
+      return false;
+    return true;
+  }
+
+  public static isValidName(uName: string): boolean {
+    if (!uName || uName?.length === 0) {
+      return false;
+    }
+    return true;
+  }
+
+  public static isValidAge(age: number): boolean {
+    if (!age) {
+      return false;
+    }
+    return true;
+  }
+
+  public static isValidHobbies(hobbies: string[]): boolean {
+    if (!hobbies) {
+      return false;
+    }
+    return true;
+  }
+
+  public static toJSON(user: User | User[]): string {
+    return JSON.stringify(user, User.jsonReplacer);
+  }
+
+  private static jsonReplacer: string[] = ['id', 'username', 'age', 'hobbies'];
 }
