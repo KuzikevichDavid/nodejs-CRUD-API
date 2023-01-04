@@ -46,17 +46,11 @@ export class User {
     };
   }
 
-  public json(): string {
-    return User.toJSON(this);
-  }
-
   private static isValid(user: User): boolean {
     if (
-      !(
-        User.isValidName(user._username) ||
-        User.isValidAge(user._age) ||
-        User.isValidHobbies(user._hobbies)
-      )
+      !User.isValidName(user._username) ||
+      !User.isValidAge(user._age) ||
+      !User.isValidHobbies(user._hobbies)
     )
       return false;
     return true;
@@ -82,10 +76,4 @@ export class User {
     }
     return true;
   }
-
-  public static toJSON(user: User | User[]): string {
-    return JSON.stringify(user, User.jsonReplacer);
-  }
-
-  private static jsonReplacer: string[] = ['id', 'username', 'age', 'hobbies'];
 }

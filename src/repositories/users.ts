@@ -1,22 +1,20 @@
 import { User } from './entities/user';
-import { v4 as uuidv4 } from 'uuid';
-
-interface IDictionary<T> {
-  [index: string]: T;
-}
+import { v4 as uuidv4, validate, version } from 'uuid';
 
 interface IRepository<T> {
   generateId(): string;
+  isValidId(id: string): boolean;
   add(user: T): T;
   get(id: string): T;
   getAll(): T[];
 }
 
-const tst: Record<string, User> = {};
-
-const usersDict: IDictionary<User> = {};
+const usersDict: Record<string, User> = {};
 
 class userRepo implements IRepository<User> {
+  isValidId(id: string): boolean {
+    return validate(id) && version(id) === 4;
+  }
   generateId(): string {
     return uuidv4();
   }
@@ -37,6 +35,7 @@ class userRepo implements IRepository<User> {
 const users: IRepository<User> = new userRepo();
 
 export const generateId = (): string => users.generateId();
+export const isValidId = (id: string): boolean => users.isValidId(id);
 export const add = (user: User): User => users.add(user);
 export const get = (id: string): User => users.get(id);
 export const getAll = (): User[] => users.getAll();
@@ -48,6 +47,9 @@ export const u: IRepository<User> = {
   add: (user: User): User => (usersDict[user.id] = user),
   get: (id: string): User => usersDict[id],
   getAll: function (): User[] {
+    throw new Error('Function not implemented.');
+  },
+  isValidId: function (id: string): boolean {
     throw new Error('Function not implemented.');
   }
 };

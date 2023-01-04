@@ -1,4 +1,4 @@
-import { get, getAll } from '../repositories/users';
+import { get, getAll, isValidId } from '../repositories/users';
 import { Code, IResponse, jsonResponse } from './response';
 
 export const readAll = async (): Promise<IResponse> => {
@@ -6,6 +6,11 @@ export const readAll = async (): Promise<IResponse> => {
 };
 
 export const read = async (id: string): Promise<IResponse> => {
+  if (!isValidId(id))
+    return jsonResponse(Code.BAD_REQ, {
+      code: Code.BAD_REQ,
+      message: `${id} isn't valid 'id' string`
+    });
   const res = get(id);
   if (!res)
     return jsonResponse(Code.NOT_FOUND, {

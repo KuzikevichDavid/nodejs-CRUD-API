@@ -1,11 +1,11 @@
 import http from 'http';
 import { createServer } from './server';
-import { routing } from './route';
+import { route } from './route';
 import { Readable } from 'stream';
 import { Code } from './REST-Api/response';
 
 const getBody = async (req: Readable): Promise<string> => {
-  const buffers = [] as any;
+  const buffers: Array<Buffer> = [];
   for await (const chunk of req) {
     buffers.push(chunk);
   }
@@ -22,7 +22,7 @@ const server = createServer(
       const reqBody = await getBody(req);
       console.log(`reqBody: ${reqBody}`);
       res.setHeader('Content-Type', 'application/json');
-      const response = await routing(req.method, req.url, reqBody);
+      const response = await route(req.method, req.url, reqBody);
       res.statusCode = response.code;
       res.end(response.body);
     } catch (err) {
