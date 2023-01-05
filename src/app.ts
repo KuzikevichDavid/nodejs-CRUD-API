@@ -24,7 +24,7 @@ const server = createServer(
       res.setHeader('Content-Type', 'application/json');
       const response = await route(req.method, req.url, reqBody);
       res.statusCode = response.code;
-      res.end(response.body);
+      res.end(response?.body);
     } catch (err) {
       console.log(`Internal Server Error ${err}`);
       res.statusCode = Code.ERROR;

@@ -1,21 +1,14 @@
 import { get, getAll, isValidId } from '../repositories/users';
-import { Code, IResponse, jsonResponse } from './response';
+import { badIdMessage, idNotFoundMessage } from './common';
+import { IResponse, responseBadReq, responseNotFound, responseOK } from './response';
 
 export const readAll = async (): Promise<IResponse> => {
-  return jsonResponse(Code.OK, getAll());
+  return responseOK(getAll());
 };
 
 export const read = async (id: string): Promise<IResponse> => {
-  if (!isValidId(id))
-    return jsonResponse(Code.BAD_REQ, {
-      code: Code.BAD_REQ,
-      message: `${id} isn't valid 'id' string`
-    });
+  if (!isValidId(id)) return responseBadReq(badIdMessage(id));
   const res = get(id);
-  if (!res)
-    return jsonResponse(Code.NOT_FOUND, {
-      code: Code.NOT_FOUND,
-      message: `User with id=${id} not found`
-    });
-  return jsonResponse(Code.OK, get(id));
+  if (!res) return responseNotFound(idNotFoundMessage(id));
+  return responseOK(get(id));
 };

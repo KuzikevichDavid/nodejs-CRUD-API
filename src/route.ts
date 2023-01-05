@@ -1,20 +1,20 @@
-import { validate, version } from 'uuid';
 import { create } from './REST-Api/create';
+import { del } from './REST-Api/delete';
 import { read, readAll } from './REST-Api/read';
-import { Code, IResponse, jsonResponse } from './REST-Api/response';
+import { IResponse, responseNotFound } from './REST-Api/response';
+import { update } from './REST-Api/update';
 
 const api = {
   GET: {
     '/api/users/': read, // api/users/{id}
     '/api/users': readAll // api/users
   },
-  POST: { '/api/users': create } // api/users
+  POST: { '/api/users': create }, // api/users
+  PUT: { '/api/users/': update }, // api/users/{id}
+  DELETE: { '/api/users/': del } // api/users/{id}
 };
 
-const NOT_FOUND = jsonResponse(Code.NOT_FOUND, {
-  code: Code.NOT_FOUND,
-  message: 'Resource Not Found'
-});
+const NOT_FOUND = responseNotFound('Resource Not Found');
 
 export const route = async (
   method: string,
@@ -29,7 +29,7 @@ export const route = async (
       const pathParam = path.substring(key.length);
       if (!pathParam.includes('/')) {
         const param = pathParam.length === 0 ? body : pathParam;
-        res = api[method]?.[key](param);
+        res = api[method]?.[key](param, body);
       }
       break;
     }
