@@ -1,4 +1,5 @@
 import { createServer as create } from 'http';
+import { Readable } from 'stream';
 
 export const createServer = (port: number, reqListener) => {
   const res = create(reqListener);
@@ -9,4 +10,12 @@ export const createServer = (port: number, reqListener) => {
     socket.end();
   });
   return res;
+};
+
+export const getBody = async (req: Readable): Promise<string> => {
+  const buffers: Array<Buffer> = [];
+  for await (const chunk of req) {
+    buffers.push(chunk);
+  }
+  return Buffer.concat(buffers).toString();
 };

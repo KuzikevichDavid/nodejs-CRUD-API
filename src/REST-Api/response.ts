@@ -1,6 +1,6 @@
 export interface IResponse {
   code: number;
-  body: string;
+  body?: string;
 }
 
 export enum Code {
@@ -21,7 +21,7 @@ export const responseOK = (body: object): IResponse => {
 };
 
 export const responseNoContent = (): IResponse => {
-  return { code: Code.NO_CONTENT, body: undefined };
+  return { code: Code.NO_CONTENT };
 };
 
 const response = (code: Code, message: string): IResponse => {

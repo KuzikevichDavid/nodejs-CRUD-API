@@ -1,8 +1,8 @@
-import { create } from './REST-Api/create';
-import { del } from './REST-Api/delete';
-import { read, readAll } from './REST-Api/read';
-import { IResponse, responseNotFound } from './REST-Api/response';
-import { update } from './REST-Api/update';
+import { create } from '../REST-Api/create';
+import { del } from '../REST-Api/delete';
+import { read, readAll } from '../REST-Api/read';
+import { IResponse, responseNotFound } from '../REST-Api/response';
+import { update } from '../REST-Api/update';
 
 const api = {
   GET: {
