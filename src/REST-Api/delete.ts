@@ -11,11 +11,11 @@ import {
 
 export const del = async (id: string): Promise<IResponse> => {
   if (!isValidId(id)) return responseBadReq(badIdMessage(id));
-  const user: User = get(id);
+  const user: User = await get(id);
   if (!user) {
     return responseNotFound(idNotFoundMessage(id));
   } else {
-    deleteUser(id);
+    await deleteUser(id);
     return jsonResponse(Code.NO_CONTENT, undefined);
   }
 };

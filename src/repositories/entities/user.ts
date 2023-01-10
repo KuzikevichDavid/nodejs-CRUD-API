@@ -57,21 +57,25 @@ export class User {
   }
 
   public static isValidName(uName: string): boolean {
-    if (!uName || uName?.length === 0) {
+    if (!uName || typeof uName !== 'string' || uName?.trim().length === 0) {
       return false;
     }
     return true;
   }
 
   public static isValidAge(age: number): boolean {
-    if (!age) {
+    if (!age || typeof age !== 'number') {
       return false;
     }
     return true;
   }
 
   public static isValidHobbies(hobbies: string[]): boolean {
-    if (!hobbies) {
+    if (
+      !hobbies ||
+      !Array.isArray(hobbies) ||
+      (hobbies.length > 0 && !hobbies.some((x) => User.isValidName(x)))
+    ) {
       return false;
     }
     return true;

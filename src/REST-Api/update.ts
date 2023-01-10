@@ -5,7 +5,7 @@ import { IResponse, responseBadReq, responseNotFound, responseOK } from './respo
 
 export const update = async (id: string, body: string): Promise<IResponse> => {
   if (!isValidId(id)) return responseBadReq(badIdMessage(id));
-  const user: User = get(id);
+  const user: User = await get(id);
   if (!user) {
     return responseNotFound(idNotFoundMessage(id));
   } else {
@@ -23,6 +23,6 @@ export const update = async (id: string, body: string): Promise<IResponse> => {
       if (User.isValidHobbies(json.hobbies)) user.hobbies = json.hobbies;
       else return responseBadReq('field hobby is not correct');
     }
-    return responseOK(upd(id, user));
+    return responseOK(await upd(user));
   }
 };

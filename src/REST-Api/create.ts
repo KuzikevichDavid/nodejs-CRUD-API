@@ -12,11 +12,7 @@ export const create = async (json: string): Promise<IResponse> => {
     !User.isValidHobbies(parsedJson?.hobbies)
   )
     return responseBadReq('Request body does not contain required fields');
-  const user = new User(
-    generateId(),
-    parsedJson?.username,
-    parsedJson?.age,
-    parsedJson?.hobbies
-  );
-  return jsonResponse(Code.CREATED, add(user));
+  const id = await generateId();
+  const user = new User(id, parsedJson?.username, parsedJson?.age, parsedJson?.hobbies);
+  return jsonResponse(Code.CREATED, await add(user));
 };
