@@ -19,7 +19,7 @@ const startLoadBalancer = () =>
     +process.env.TASK3_REST_API_PORT,
     (req: IncomingMessage, res: ServerResponse) => {
       try {
-        res.statusCode = 301;
+        res.statusCode = 307;
         res.setHeader('Location', `http://localhost:${getFreePort()}${req.url}`);
         res.end();
       } catch (err) {

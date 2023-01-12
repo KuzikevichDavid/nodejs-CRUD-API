@@ -276,8 +276,9 @@ FakesAssemblies/
 node_modules/
 package-lock.json
 
-# Type Script generated files
-out/
+# Node.js TypeScript distribution
+dist/
+bundle/
 
 # Visual Studio 6 build log
 *.plg
