@@ -1,5 +1,5 @@
 import cluster from 'cluster';
-import { IncomingMessage, ServerResponse } from 'http';
+import { IncomingMessage, request, ServerResponse } from 'http';
 import { cpus } from 'os';
 import { createServer } from './common';
 import { IMsg, masterOnMessage } from './messaging';
@@ -10,18 +10,29 @@ const ports: number[] = Array<number>(workersNum);
 let current = -1;
 
 const getFreePort = (): number => {
-  const index = ++current >= workersNum ? (current = 0) : current;
-  return ports[index];
+  return ports[++current % workersNum];
 };
 
 const startLoadBalancer = () =>
   createServer(
     +process.env.TASK3_REST_API_PORT,
-    (req: IncomingMessage, res: ServerResponse) => {
+    async (req: IncomingMessage, res: ServerResponse) => {
       try {
-        res.statusCode = 307;
-        res.setHeader('Location', `http://localhost:${getFreePort()}${req.url}`);
-        res.end();
+        const options = {
+          port: getFreePort(),
+          path: req.url,
+          method: req.method,
+          headers: req.headers
+        }
+        await new Promise((resolve) => {
+          req.pipe(request(options, async (clientRes) => {
+            res.statusCode = clientRes.statusCode;
+            res.setHeader('content-type', clientRes.headers['content-type'])
+            const result = clientRes.pipe(res);
+            res.end();
+            resolve(result);
+          }));
+        });
       } catch (err) {
         res.statusCode = 500;
         res.end(JSON.stringify(err));

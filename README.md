@@ -7,21 +7,42 @@
 
  `npm i`
 
- Change file `.env` to set `{port}` value of envirenment variable `TASK3_REST_API_PORT`. 
+ Change file `.env` to set value of envirenment variable `TASK3_REST_API_PORT`. 
 ## CLI Commands
  - `npm run start:dev` - application is run in development mode using nodemon
  - `npm run start:prod` - starts the build process and then runs the bundled file
- - `npm run start:multi` - starts multiple instances of application
+ - `npm run start:multi` - do the same that `start:prod`'s do with a load balancer(using Round-robin algorithm)
  - `npm run test` - starts tests scenarios
 ## API documentation
+
+### Endpoint: `api/users`
+
+`GET api/users` - to get all users
+
+`GET api/users/${userId}` - to get user by id (uuid)
+
+`POST api/users` - to create record about new user and store it in database
+
+`PUT api/users/${userId}` - to update existing user 
+
+`DELETE api/users/${userId}` - to delete existing user from database
+
+### User's mandatory fields
+
+`username` — user's name (string, **required**)
+
+`age` — user's age (number, **required**)
+
+`hobbies` — user's hobbies (array of strings or empty array, **required**)
+
 ### Get users
-* **URL**
+* **URL:**
 	`/api/users`
 * **Method:**
 	GET
-*  **URL Params**
+*  **URL: Params**:
 	None
-* **Data Params**
+* **Data Params**:
 	None
 * **Success Response:**
     * **Code:** 200 
@@ -37,13 +58,13 @@
         ]
         ```
 ### Get user
-* **URL**
+* **URL:**
 	`/api/users/{id}`
 * **Method:**
 	GET
-*  **URL Params**
+*  **URL: Params**:
 	`{id}` - id of user in format `uuid` version 4. Example `ea4ccdc6-a059-46b0-a9c0-45e77ffca7fd`
-* **Data Params**
+* **Data Params**:
 	None
 * **Success Response:**
     * **Code:** 200 
@@ -57,20 +78,20 @@
         }
         ```
 * **Error Response:**
-    * **Code:** 404 NOT FOUND
-    **Content:** `{  "code": "404", "message": "User with id=${id} not found" }`
+    * **Code:** 404 "NOT FOUND"
+    **Content:** `{  "code": "404", "message": "User with {id} not found" }`
 	**OR**
 	* When URL Param `{id}` is not correct `uuid` 
-	**Code:** 400 BAD REQUEST
-    **Content:** `{ "code": "400", "message": "${id} isn't valid 'id' string"}`
+	**Code:** 400 "BAD REQUEST"
+    **Content:** `{ "code": "400", "message": "{id} isn't valid 'id' string"}`
 ### Create user
-* **URL**
+* **URL:**
 	`/api/users`
 * **Method:**
 	POST
-*  **URL Params**
+*  **URL: Params**:
 	None
-* **Data Params**
+* **Data Params**:
 	JSON in format:
     ```
     {
@@ -92,20 +113,20 @@
     	```
 * **Error Response:**
 	* When `Data params` is incorrect
-	**Code:** 400 BAD REQUEST
+	**Code:** 400 "BAD REQUEST"
     **Content:** `{ "code": "400", "message": "Request body does not contain required fields"}`
 	OR
 	* When `Data params` is empty or incorrect JSON
-	**Code:** 400 BAD REQUEST
+	**Code:** 400 "BAD REQUEST"
     **Content:** `{ "code": "400", "message": "Request body incorrect"}`
 ### Update user
-* **URL**
+* **URL:**
 	`/api/users/{id}`
 * **Method:**
 	PUT
-*  **URL Params**
+*  **URL: Params**:
 	`{id}` - id of user in format `uuid` version 4. Example `ea4ccdc6-a059-46b0-a9c0-45e77ffca7fd`
-* **Data Params**
+* **Data Params**:
 	JSON in format:
     ```
     {
@@ -126,33 +147,33 @@
     	}
 * **Error Response:**
 	* When `Data params` is empty or incorrect JSON
-	**Code:** 400 BAD REQUEST
+	**Code:** 400 "BAD REQUEST"
     **Content:** `{ "code": "400", "message": "Request body incorrect"}`
     OR
     * When user with URL Param `{id}` is not exists
-	**Code:** 404 NOT FOUND 
-    **Content:** `{ "code": "404", "message": "User with id=${id} not found"}`
+	**Code:** 404 "NOT FOUND" 
+    **Content:** `{ "code": "404", "message": "User with {id} not found"}`
 	OR
 	* When URL Param `{id}` is not correct `uuid`
-	**Code:** 400 BAD REQUEST 
-    **Content:** `{ "code": "400", "message": "${id} isn't valid 'id' string"}`
+	**Code:** 400 "BAD REQUEST" 
+    **Content:** `{ "code": "400", "message": "{id} isn't valid 'id' string"}`
 	OR
-	* **Code:** 400 BAD REQUEST 
+	* **Code:** 400 "BAD REQUEST" 
     **Content:** `{ "code": "400", "message": "field '{username}' is not correct"}`
 	OR
-	* **Code:** 400 BAD REQUEST
+	* **Code:** 400 "BAD REQUEST"
     **Content:** `{ "code": "400", "message": "field '{age}' is not correct"}`
 	OR
-	* **Code:** 400 BAD REQUEST
+	* **Code:** 400 "BAD REQUEST"
     **Content:** `{ "code": "400", "message": "field '{hobby}' is not correct"}`
 ### Delete user
-* **URL**
+* **URL:**
 	`/api/users/{id}`
 * **Method:**
 	DELETE
-*  **URL Params**
+*  **URL: Params**:
 	`{id}` - id of user in format `uuid` version 4. Example `ea4ccdc6-a059-46b0-a9c0-45e77ffca7fd`
-* **Data Params**
+* **Data Params**:
 	None
 * **Success Response:**
 	* **Code:** 204
@@ -160,9 +181,9 @@
 	    None
 * **Error Response:**
     * When user with URL Param `{id}` is not exists
-	**Code:** 404 NOT FOUND 
-    **Content:** `{ "code": "404", "message": "User with id=${id} not found"}`
+	**Code:** 404 "NOT FOUND" 
+    **Content:** `{ "code": "404", "message": "User with {id} not found"}`
 	OR
 	* When URL Param `{id}` is not correct `uuid`
-	**Code:** 400 BAD REQUEST 
-    **Content:** '{ "code": "400", "message": "${id} isn't valid 'id' string"}'
+	**Code:** 400 "BAD REQUEST" 
+    **Content:** `{ "code": "400", "message": "{id} isn't valid 'id' string"}`
