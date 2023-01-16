@@ -29,10 +29,10 @@ const startLoadBalancer = () =>
             res.statusCode = clientRes.statusCode;
             res.setHeader('content-type', clientRes.headers['content-type'])
             const result = clientRes.pipe(res);
-            res.end();
             resolve(result);
           }));
         });
+        res.end();
       } catch (err) {
         res.statusCode = 500;
         res.end(JSON.stringify(err));
