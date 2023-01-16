@@ -8,7 +8,7 @@
     "start:multi": "webpack && node ./bundle/bundle.js --cluster",
     "lint": "npx eslint ./src/**/*.ts --fix",
     "prettier": "npx prettier --config .prettierrc \"src/**/*.ts\" --write",
-    "test": "jest --silent=true",
+    "test": "jest --silent=true"
   },
   "repository": {
     "type": "git",

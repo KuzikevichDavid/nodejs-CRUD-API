@@ -79,15 +79,12 @@
         ```
 * **Error Response:**
     * **Code:** 404 "NOT FOUND"
-
     **Content:** `{  "code": "404", "message": "User with {id} not found" }`
 
 	**OR**
 
 	* When URL Param `{id}` is not correct `uuid` 
-
 	**Code:** 400 "BAD REQUEST"
-
     **Content:** `{ "code": "400", "message": "{id} isn't valid 'id' string"}`
 	
 ### Create user
