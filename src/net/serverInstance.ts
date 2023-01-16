@@ -4,7 +4,7 @@ import { route } from './route';
 import { Code } from '../REST-Api/response';
 
 export const start = () => {
-  const port: number = +process.env.TASK3_REST_API_PORT;
+  const port: number = +process.env.TASK3_REST_API_PORT || 4000;
 
   const server = createServer(
     port,
@@ -43,4 +43,6 @@ export const start = () => {
     console.log(`before_exit, code:${code}`);
     server.close();
   });
+
+  return server;
 };

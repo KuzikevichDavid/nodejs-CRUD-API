@@ -113,9 +113,6 @@ ipch/
 *.vspx
 *.sap
 
-# Visual Studio Trace Files
-*.e2e
-
 # TFS 2012 Local Workspace
 $tf/
 
@@ -279,6 +276,9 @@ package-lock.json
 # Node.js TypeScript distribution
 dist/
 bundle/
+
+# Node.js Test coverage
+coverage/
 
 # Visual Studio 6 build log
 *.plg

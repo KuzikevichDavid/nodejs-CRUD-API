@@ -10,19 +10,30 @@ export const update = async (id: string, body: string): Promise<IResponse> => {
     return responseNotFound(idNotFoundMessage(id));
   } else {
     const json = parseJson(body);
+    let updated = false;
     if (!json) return responseBadReq(badJSONMessage);
     if (typeof json?.age !== 'undefined') {
-      if (User.isValidAge(json.age)) user.age = json.age;
+      if (User.isValidAge(json.age)) {
+        updated = true;
+        user.age = json.age;
+      }
       else return responseBadReq(`field age='${json.age}' is not correct`);
     }
     if (typeof json?.username !== 'undefined') {
-      if (User.isValidName(json.username)) user.username = json.username;
+      if (User.isValidName(json.username)) {
+        user.username = json.username;
+        updated = true;
+      }
       else return responseBadReq(`field username='${json.username}' is not correct`);
     }
     if (typeof json?.hobbies !== 'undefined') {
-      if (User.isValidHobbies(json.hobbies)) user.hobbies = json.hobbies;
+      if (User.isValidHobbies(json.hobbies)) {
+        user.hobbies = json.hobbies;
+        updated = true;
+      }
       else return responseBadReq('field hobby is not correct');
     }
-    return responseOK(await upd(user));
+    if (updated) return responseOK(await upd(user));
+    else return responseBadReq(badJSONMessage);
   }
 };
