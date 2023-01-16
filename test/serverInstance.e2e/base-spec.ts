@@ -38,13 +38,15 @@ describe("scenario 1 - base logic", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(testUser);
   });
-  it('should update user and return updated', async () => {
-    testUser.username = 'Gary';
-    testUser.hobbies = ['swim'];
+    it('should update user and return updated', async () => {
+    const updated = { ...testUser };
+    delete updated.id;
+    updated.username = (testUser.username = 'Gary');
+    updated.hobbies = (testUser.hobbies = ['swim']);
 
     const response = await supertest(app)
       .put(`${API}/${testUser.id}`)
-      .send(JSON.stringify(testUser));
+      .send(JSON.stringify(updated));
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(testUser);

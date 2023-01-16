@@ -64,7 +64,7 @@ export class User {
   }
 
   public static isValidAge(age: number): boolean {
-    if (!age || typeof age !== 'number') {
+    if (!age || typeof age !== 'number' || age < 0) {
       return false;
     }
     return true;

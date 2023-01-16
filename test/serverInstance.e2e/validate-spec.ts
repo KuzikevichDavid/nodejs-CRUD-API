@@ -1,7 +1,6 @@
 import { Server } from "http";
 import supertest from "supertest";
 import { start } from "../../src/net/serverInstance";
-import { User } from "../../src/repositories/entities/user";
 
 describe('Scenario 4 - validate User fields', () => {
   const API = '/api/users';

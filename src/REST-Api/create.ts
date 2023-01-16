@@ -1,6 +1,6 @@
 import { User } from '../repositories/entities/user';
 import { add, generateId } from '../repositories/users';
-import { badJSONMessage, parseJson } from './common';
+import { badJSONMessage, notValidJSON, parseJson } from './common';
 import { Code, IResponse, jsonResponse, responseBadReq } from './response';
 
 export const create = async (json: string): Promise<IResponse> => {
@@ -9,9 +9,10 @@ export const create = async (json: string): Promise<IResponse> => {
   if (
     !User.isValidName(parsedJson?.username) ||
     !User.isValidAge(parsedJson?.age) ||
-    !User.isValidHobbies(parsedJson?.hobbies)
+    !User.isValidHobbies(parsedJson?.hobbies) ||
+    Object.keys(parsedJson).length !== 3
   )
-    return responseBadReq('Request body does not contain required fields');
+    return responseBadReq(notValidJSON);
   const id = await generateId();
   const user = new User(id, parsedJson?.username, parsedJson?.age, parsedJson?.hobbies);
   return jsonResponse(Code.CREATED, await add(user));

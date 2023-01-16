@@ -117,7 +117,7 @@
 * **Error Response:**
 	* When `Data params` is incorrect
 	**Code:** 400 "BAD REQUEST"
-    **Content:** `{ "code": "400", "message": "Request body does not contain required fields"}`
+    **Content:** `{ "code": "400", "message": "Request body not contain required fields or they are invalid"}`
 	OR
 	* When `Data params` is empty or incorrect JSON
 	**Code:** 400 "BAD REQUEST"
@@ -149,9 +149,9 @@
     		"hobbies": ["skating"]
     	}
 * **Error Response:**
-	* When `Data params` is empty or incorrect JSON
+	* When `Data params` not contain required fields or some fields not valid
 	**Code:** 400 "BAD REQUEST"
-    **Content:** `{ "code": "400", "message": "Request body incorrect"}`
+    **Content:** `{ "code": "400", "message": "Request body not contain required fields or they are invalid"}`
     OR
     * When user with URL Param `{id}` is not exists
 	**Code:** 404 "NOT FOUND" 
@@ -160,15 +160,6 @@
 	* When URL Param `{id}` is not correct `uuid`
 	**Code:** 400 "BAD REQUEST" 
     **Content:** `{ "code": "400", "message": "{id} isn't valid 'id' string"}`
-	OR
-	* **Code:** 400 "BAD REQUEST" 
-    **Content:** `{ "code": "400", "message": "field '{username}' is not correct"}`
-	OR
-	* **Code:** 400 "BAD REQUEST"
-    **Content:** `{ "code": "400", "message": "field '{age}' is not correct"}`
-	OR
-	* **Code:** 400 "BAD REQUEST"
-    **Content:** `{ "code": "400", "message": "field '{hobby}' is not correct"}`
 ### Delete user
 * **URL:**
 	`/api/users/{id}`

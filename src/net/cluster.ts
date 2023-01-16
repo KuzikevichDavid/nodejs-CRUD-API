@@ -4,7 +4,7 @@ import { cpus } from 'os';
 import { createServer } from './common';
 import { IMsg, masterOnMessage } from './messaging';
 
-let workersRun: number = 0;
+let workersRun = 0;
 const workersNum = cpus().length;
 const ports: number[] = Array<number>(workersNum);
 let current = -1;
@@ -23,14 +23,16 @@ const startLoadBalancer = () =>
           path: req.url,
           method: req.method,
           headers: req.headers
-        }
+        };
         await new Promise((resolve) => {
-          req.pipe(request(options, async (clientRes) => {
-            res.statusCode = clientRes.statusCode;
-            res.setHeader('content-type', clientRes.headers['content-type'])
-            const result = clientRes.pipe(res);
-            resolve(result);
-          }));
+          req.pipe(
+            request(options, async (clientRes) => {
+              res.statusCode = clientRes.statusCode;
+              res.setHeader('content-type', clientRes.headers['content-type']);
+              const result = clientRes.pipe(res);
+              resolve(result);
+            })
+          );
         });
         res.end();
       } catch (err) {
