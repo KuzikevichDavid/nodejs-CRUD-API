@@ -41,7 +41,11 @@ export const start = () => {
 
   process.on('beforeExit', (code) => {
     console.log(`before_exit, code:${code}`);
-    server.close();
+    server.close(() => process.exit());
+  });
+
+  process.on('SIGINT', () => {
+    server.close(() => process.exit());
   });
 
   return server;

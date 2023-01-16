@@ -40,7 +40,7 @@
 	`/api/users`
 * **Method:**
 	GET
-*  **URL: Params**:
+*  **URL Params**:
 	None
 * **Data Params**:
 	None
@@ -62,7 +62,7 @@
 	`/api/users/{id}`
 * **Method:**
 	GET
-*  **URL: Params**:
+*  **URL Params**:
 	`{id}` - id of user in format `uuid` version 4. Example `ea4ccdc6-a059-46b0-a9c0-45e77ffca7fd`
 * **Data Params**:
 	None
@@ -79,17 +79,23 @@
         ```
 * **Error Response:**
     * **Code:** 404 "NOT FOUND"
+
     **Content:** `{  "code": "404", "message": "User with {id} not found" }`
+
 	**OR**
+
 	* When URL Param `{id}` is not correct `uuid` 
+
 	**Code:** 400 "BAD REQUEST"
+
     **Content:** `{ "code": "400", "message": "{id} isn't valid 'id' string"}`
+	
 ### Create user
 * **URL:**
 	`/api/users`
 * **Method:**
 	POST
-*  **URL: Params**:
+*  **URL Params**:
 	None
 * **Data Params**:
 	JSON in format:
@@ -124,7 +130,7 @@
 	`/api/users/{id}`
 * **Method:**
 	PUT
-*  **URL: Params**:
+*  **URL Params**:
 	`{id}` - id of user in format `uuid` version 4. Example `ea4ccdc6-a059-46b0-a9c0-45e77ffca7fd`
 * **Data Params**:
 	JSON in format:
@@ -171,7 +177,7 @@
 	`/api/users/{id}`
 * **Method:**
 	DELETE
-*  **URL: Params**:
+*  **URL Params**:
 	`{id}` - id of user in format `uuid` version 4. Example `ea4ccdc6-a059-46b0-a9c0-45e77ffca7fd`
 * **Data Params**:
 	None
