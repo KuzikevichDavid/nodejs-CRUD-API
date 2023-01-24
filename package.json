@@ -1,0 +1,55 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "simple crud api",
+  "scripts": {
+    "start:dev": "nodemon",
+    "start:prod": "webpack && node ./bundle/bundle.js",
+    "start:multi": "webpack && node ./bundle/bundle.js --cluster",
+    "lint": "npx eslint ./src/**/*.ts --fix",
+    "prettier": "npx prettier --config .prettierrc \"src/**/*.ts\" --write",
+    "test": "jest --silent=true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KuzikevichDavid/nodejs-CRUD-API.git"
+  },
+  "keywords": [
+    "crud-api",
+    "api",
+    "rest-api",
+    "rest",
+    "crud"
+  ],
+  "author": "Davyd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KuzikevichDavid/nodejs-CRUD-API/issues"
+  },
+  "homepage": "https://github.com/KuzikevichDavid/nodejs-CRUD-API#readme",
+  "devDependencies": {
+    "@types/jest": "^29.2.5",
+    "@types/node": "^18.11.17",
+    "@types/supertest": "^2.0.12",
+    "@types/uuid": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "@webpack-cli/generators": "^3.0.1",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.4",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "uuid": "^9.0.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
